@@ -1,2 +1,2 @@
-# mobile-auto33-hometasks
-Домашние задания, начиная с Ex8.
+# mobile-auto33-task02
+mobile-auto33-task02 - Ex1: Конфигурация инструментов
