@@ -1,42 +1,18 @@
 package com.company;
 
-import io.appium.java_client.AppiumDriver;
+import com.company.lib.CoreTestCase;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.Duration;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.net.URL;
 import java.util.List;
 
-public class FirstTest {
-
-    private AppiumDriver driver;
-
-    @Before
-    public void setUp() throws Exception {
-        DesiredCapabilities capabilities= new DesiredCapabilities();
-
-        capabilities.setCapability("platformName","Android");
-        capabilities.setCapability("deviceName","AndroidTestDevice");
-        capabilities.setCapability("platformVersion","10");
-        capabilities.setCapability("automationName","Appium");
-        capabilities.setCapability("appPackage","org.wikipedia");
-        capabilities.setCapability("appActivity",".main.MainActivity");
-        capabilities.setCapability("app","/Users/dzmitryviachaslavau/Documents/MobileAutomationCourse/HomeTasks/mobile-auto33-task02/apks/org.wikipedia.com.apk");
-        capabilities.setCapability("orientation", "PORTRAIT"); // добавлена Capability на ориентацию
-
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-    }
+public class FirstTest extends CoreTestCase {
 
     String articles_list_title = "1-st articles list for reading";
     String articles_list_description = "1-st articles list for reading description";
@@ -48,11 +24,6 @@ public class FirstTest {
     String search_result_locator = "//*[@resource-id='org.wikipedia:id/page_list_item_title']";
     String word_for_empty_search = "zedqazss pewwqsd frtd zzz";
     String empty_search_result_locator = "//*[@text='No results']";
-
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
 
     @Test
     public void testAmountOfNotEmptySearch(){
@@ -290,7 +261,7 @@ public class FirstTest {
     }
 
     @Test
-    public void saveArticlesToMyList(){ //Ex5.Тест: сохранение двух статей
+    public void testSaveArticlesToMyList(){ //Ex5.Тест: сохранение двух статей
 
         WebElement element_to_skip = driver.findElementByXPath("//*[contains(@text,'SKIP')]");
         element_to_skip.click();
@@ -452,7 +423,7 @@ public class FirstTest {
     }
 
     @Test
-    public void assertTitleTest(){  // Ex6: Тест: assert title
+    public void testAssertTitleTest(){  // Ex6: Тест: assert title
 
         WebElement element_to_skip = driver.findElementByXPath("//*[contains(@text,'SKIP')]");
         element_to_skip.click();
