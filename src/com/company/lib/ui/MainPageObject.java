@@ -14,7 +14,7 @@ public class MainPageObject {
 
     protected AppiumDriver driver;
 
-    public MainPageObject(AppiumDriver driver) {
+    public MainPageObject(AppiumDriver driver) { //Конструктор, к которорму будут обращаться все наши тесты.
         this.driver = driver;
     }
 

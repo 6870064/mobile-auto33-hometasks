@@ -1,5 +1,6 @@
 package com.company;
 import com.company.lib.CoreTestCase;
+import com.company.lib.SearchPageObject;
 import com.company.lib.ui.MainPageObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,13 +10,8 @@ import org.openqa.selenium.WebElement;
 
 public class FirstTest extends CoreTestCase {
 
-    private MainPageObject MainPageObject;
-    protected void setUp() throws Exception{
-        super.setUp();
-
-        MainPageObject = new MainPageObject(driver);
-    }
-
+    String search_var = "Search Wikipedia";
+    String error_var = "Cannot find 'Search Wikipedia' input";
     String articles_list_title = "1-st articles list for reading";
     String articles_list_description = "1-st articles list for reading description";
     String first_word_for_search = "Java";
@@ -26,6 +22,26 @@ public class FirstTest extends CoreTestCase {
     String search_result_locator = "//*[@resource-id='org.wikipedia:id/page_list_item_title']";
     String word_for_empty_search = "zedqazss pewwqsd frtd zzz";
     String empty_search_result_locator = "//*[@text='No results']";
+
+    private MainPageObject MainPageObject;
+
+    protected void setUp() throws Exception{
+        super.setUp();
+
+        MainPageObject = new MainPageObject(driver);
+    }
+
+    @Test
+    public void testSearch(){
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+
+        SearchPageObject.typeSkipElement();
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine(first_word_for_search);
+        SearchPageObject.waitForSearchResult(first_word_for_search_description);
+
+    }
 
     @Test
     public void testAmountOfNotEmptySearch(){
