@@ -116,5 +116,6 @@ public void addFirstArticleToMyList(String articles_list_title, String articles_
                 "Cannot find option to add article to the reading list",
                 5
         );
+
     }
 }

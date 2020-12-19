@@ -3,6 +3,7 @@ import com.company.lib.CoreTestCase;
 import com.company.lib.SearchPageObject;
 import com.company.lib.ui.ArticlePageObject;
 import com.company.lib.ui.MainPageObject;
+import com.company.lib.ui.MyListsPageObject;
 import com.company.lib.ui.NavigationUI;
 import org.junit.Assert;
 import org.junit.Test;
@@ -165,69 +166,10 @@ public class FirstTest extends CoreTestCase {
         ArticlePageObject.waitForTitleElementSecondArticle();
         ArticlePageObject.addSecondArticleToMyList(articles_list_title, articles_list_description);
 
-        MainPageObject.waitForElementAndClick(
-                By.xpath("//*[contains(@text,'" + second_word_for_search_description + "')]"),
-                "Cannot find 'Search Wikipedia' input",
-                5
-        );
-
-//        MainPageObject.waitForElementPresent(
-//                By.xpath("//*[contains(@text,'" + second_word_for_search + "')]"),
-//                "Cannot find article title!",
-//                5
-//        );
-//
-//        MainPageObject.waitForElementAndClick( //Нажатие на кнопку [Save] в левом нижнем углу экрана для сохранения статьи
-//                By.xpath("//*[@resource-id='org.wikipedia:id/article_menu_bookmark'][@text='Save']"),
-//                "Cannot find the button to open article options",
-//                5
-//        );
-//
-//        MainPageObject.waitForElementAndClick(  //Нажатие на кнопку [ADD TO LIST] на всплывающем поп апе для сохранения статьи
-//                By.xpath("//*[@resource-id='org.wikipedia:id/snackbar_action'][@text='ADD TO LIST']"),
-//                "Cannot find option to add article to the reading list",
-//                5
-//        );
-//
-//        MainPageObject.waitForElementAndClick( //Добавление второй статьи в уже существующий список
-//                By.xpath("//android.widget.TextView[@text='" + articles_list_title + "']"),
-//                "Cannot find option to add article to the reading list",
-//                5
-//        );
-
-        MainPageObject.waitForElementAndClick( // Нажатие на [VIEW LIST] и открытие переченя списков статей
-                By.xpath("//*[@resource-id='org.wikipedia:id/snackbar_action']"),
-                "Cannot open My lists screen",
-                5
-        );
-
-        MainPageObject.waitForElementAndClick( //Открытие списка статей с сохраненными двумя статьями
-                By.xpath("//android.widget.TextView[@text='" + articles_list_title + "']"),
-                "Cannot open articles list titled '" + articles_list_title + "'",
-                5
-        );
-
-        MainPageObject.swipeElementToTheLeft( // Удаление первой статьи
-                By.xpath("//*[@text='" + first_word_for_search_description + "']"),
-                "Cannot find saved article"
-        );
-
-        MainPageObject.waitForElementNotPresent(
-                By.xpath("//*[@text='" + first_word_for_search_description+ "']"),
-                "Cannot delete saved article",
-                5
-        );
-        MainPageObject.waitForElementPresent( // Убеждаемся, что вторая статься осталась
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + second_word_for_search + "']"),
-                "Cannot find saved article titled " + second_word_for_search + "",
-                10
-        );
-
-        MainPageObject.waitForElementAndClick(  //Открытие статьи. по сути и есть верификация по тайтлу.
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + second_word_for_search + "']"),
-                "Cannot open the article titled " + second_word_for_search + "",
-                10
-        );
+        MyListsPageObject MyListsPageObject = new MyListsPageObject(driver);
+        MyListsPageObject.myListOpening(articles_list_title);
+        MyListsPageObject.swipeArticleToDelete(first_word_for_search_description);
+        MyListsPageObject.articleAvailabilityCheck(second_word_for_search);
     }
 
     @Test
