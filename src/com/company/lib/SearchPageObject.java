@@ -2,6 +2,7 @@ package com.company.lib;
 
 import com.company.lib.ui.MainPageObject;
 import io.appium.java_client.AppiumDriver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +14,8 @@ public class SearchPageObject extends MainPageObject {
     SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='Object-oriented programming language']",
     SEARCH_RESULT_BY_SUBSTRING2_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='German industrial metal band']",
     SEARCH_RESULT_ELEMENT = "//*[resource-id='org.wikipedia:id/search_results_list']/*[resource-id=org.wikipedia:id/page_list_item_description']",
-    SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results']";
+    SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results']",
+    SEARCH_RESULT_LOCATOR = "//*[@resource-id='org.wikipedia:id/page_list_item_title']";;
 
     public SearchPageObject(AppiumDriver driver) { //берем драйвер из MainPageObject
         super(driver);
@@ -91,5 +93,20 @@ public class SearchPageObject extends MainPageObject {
 
     public void assertThereIsNoResultOfSearch(){
         this.assertElementNotPresent(By.xpath(SEARCH_RESULT_ELEMENT), "We supposed not to find any results");
+    }
+
+    public void assertSearchResult(String first_word_for_search){
+        waitForElementPresent(
+                By.xpath(SEARCH_RESULT_LOCATOR),
+                "Cannot find anything by the request " + first_word_for_search,
+                10
+        );
+        int amount_of_search_results = assertElementPresent(
+                By.xpath(SEARCH_RESULT_LOCATOR)
+        );
+        Assert.assertTrue(
+                "We have found too few results of searching",
+                amount_of_search_results > 0
+        );
     }
 }
