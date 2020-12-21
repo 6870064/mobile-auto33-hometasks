@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "appium-ios-driver": "^4.8.0"
+  }
+}

@@ -9,6 +9,10 @@ import java.time.Duration;
 
 public class CoreTestCase extends TestCase {
 
+    private static final String
+    PLATFORM_IOS = "ios",
+    PLATFORM_ANDROID = "android";
+
     protected AppiumDriver driver;
     private static String AppiumUrl = "http://127.0.0.1:4723/wd/hub";
 
@@ -17,15 +21,7 @@ public class CoreTestCase extends TestCase {
 
         super.setUp();
 
-        DesiredCapabilities capabilities= new DesiredCapabilities();
-        capabilities.setCapability("platformName","Android");
-        capabilities.setCapability("deviceName","AndroidTestDevice");
-        capabilities.setCapability("platformVersion","10");
-        capabilities.setCapability("automationName","Appium");
-        capabilities.setCapability("appPackage","org.wikipedia");
-        capabilities.setCapability("appActivity",".main.MainActivity");
-        capabilities.setCapability("app","/Users/dzmitryviachaslavau/Documents/MobileAutomationCourse/HomeTasks/mobile-auto33-task02/apks/org.wikipedia.com.apk");
-        capabilities.setCapability("orientation", "PORTRAIT"); // добавлена Capability на ориентацию
+        DesiredCapabilities capabilities = this.getCapabilitiesByPlatformEnv();
 
         driver = new AndroidDriver(new URL(AppiumUrl), capabilities);
     }
@@ -37,6 +33,30 @@ public class CoreTestCase extends TestCase {
         super.tearDown();
     }
 
+    private DesiredCapabilities getCapabilitiesByPlatformEnv() throws Exception {
+        String platform = System.getenv("PLATFORM");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+
+        if (platform.equals(PLATFORM_ANDROID)) {
+            capabilities.setCapability("platformName", "Android");
+            capabilities.setCapability("deviceName", "AndroidTestDevice");
+            capabilities.setCapability("platformVersion", "10");
+            capabilities.setCapability("automationName", "Appium");
+            capabilities.setCapability("appPackage", "org.wikipedia");
+            capabilities.setCapability("appActivity", ".main.MainActivity");
+            capabilities.setCapability("app", "/Users/dzmitryviachaslavau/Documents/MobileAutomationCourse/HomeTasks/mobile-auto33-hometasks/apks/org.wikipedia.com.apk");
+            capabilities.setCapability("orientation", "PORTRAIT"); // добавлена Capability на ориентацию
+        } else if (platform.equals(PLATFORM_IOS)) {
+            capabilities.setCapability("platformName", "iOS");
+            capabilities.setCapability("deviceName", "iPhone X");
+            capabilities.setCapability("platformVersion", "11.4");
+            capabilities.setCapability("app", "/Users/dzmitryviachaslavau/Documents/MobileAutomationCourse/HomeTasks/mobile-auto33-hometasks/apks/Wikipedia.app");
+        } else {
+            throw new Exception("Cannot get run platform from env variable. Platform value " +platform);
+        }
+        return capabilities;
+    }
+
     protected void rotateScreenPortrait(){
         driver.rotate(ScreenOrientation.PORTRAIT);
     }
@@ -45,7 +65,7 @@ public class CoreTestCase extends TestCase {
         driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
-    protected void backgroundApp(int seconds){
+    protected void backgroundApp(Duration seconds){
         driver.runAppInBackground(seconds);
     }
 

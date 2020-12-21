@@ -2,6 +2,7 @@ package com.company.lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -57,18 +58,22 @@ public class MainPageObject {
     }
 
     public void swipeUP(int timeOfSwipe) {
-        TouchAction action = new TouchAction(driver);
-        Dimension size = driver.manage().window().getSize();
+     TouchAction action = new TouchAction(driver);
+     Dimension size = driver.manage().window().getSize();
 
-        int x = size.width/2;
-        int start_y = (int) (size.height * 0.8);
-        int end_y = (int) (size.height * 0.2);
+     int x = size.width/2;
+     int start_y = (int) (size.height * 0.8);
+     int end_y = (int) (size.height * 0.2);
 
-        action.press(x, start_y).
-                waitAction(timeOfSwipe).
-                moveTo(x, end_y).
-                release().
-                perform();
+     new TouchAction(driver).tap(PointOption.point(x,start_y)).
+     release().
+     perform();
+//
+//        action.press(x, start_y).
+//                waitAction(timeOfSwipe).
+//                moveTo(x, end_y).
+//                release().
+//                perform();
     }
 
     public void swipeUpQuick() {
@@ -102,12 +107,16 @@ public class MainPageObject {
         int lower_y = upper_y + element.getSize().getHeight();
         int middle_y = (upper_y + lower_y) / 2;
 
-        TouchAction action = new TouchAction(driver);
-        action.
-                press(right_x, middle_y).
-                waitAction(350).
-                moveTo(left_x,middle_y).
-                release().perform();
+        new TouchAction(driver).tap(PointOption.point(right_x,middle_y)).
+                release().
+                perform();
+
+//        TouchAction action = new TouchAction(driver);
+//        action.
+//                press(right_x, middle_y).
+//                waitAction(350).
+//                moveTo(left_x,middle_y).
+//                release().perform();
     }
 
     public int getAmountOfElements(By by) { //Метод, определяющий кол-во элементов, которые мы нашли.
