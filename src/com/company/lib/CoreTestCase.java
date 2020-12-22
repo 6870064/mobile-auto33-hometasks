@@ -21,8 +21,7 @@ public class CoreTestCase extends TestCase {
 
         super.setUp();
 
-        DesiredCapabilities capabilities = this.getCapabilitiesByPlatformEnv();
-
+        DesiredCapabilities capabilities = this.getCapabilitiesByPlatformEnv(); //Устанавливаем capabilities через этот метод
         driver = new AndroidDriver(new URL(AppiumUrl), capabilities);
     }
 
@@ -34,7 +33,8 @@ public class CoreTestCase extends TestCase {
     }
 
     private DesiredCapabilities getCapabilitiesByPlatformEnv() throws Exception {
-        String platform = System.getenv("PLATFORM");
+
+        String platform = System.getenv("PLATFORM"); //С помощью этой строчки получаем значение переменной среды
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         if (platform.equals(PLATFORM_ANDROID)) {
