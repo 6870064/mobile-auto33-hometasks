@@ -4,16 +4,17 @@ import io.appium.java_client.AppiumDriver;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
-public class SearchPageObject extends MainPageObject {
+abstract public class SearchPageObject extends MainPageObject {
 
-    private static final String
-    SEARCH_INIT_ELEMENT = "xpath://*[contains(@text,'Search Wikipedia')]",
-    SEARCH_CANCEL_BUTTON = "id:org.wikipedia:id/search_close_btn",
-    SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING}']",
-    SEARCH_RESULT_BY_SUBSTRING2_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='German industrial metal band']",
-    SEARCH_RESULT_ELEMENT = "xpath://*[resource-id='org.wikipedia:id/search_results_list']/*[resource-id=org.wikipedia:id/page_list_item_description']",
-    SEARCH_EMPTY_RESULT_ELEMENT = "xpath://*[@text='No results']",
-    SEARCH_RESULT_LOCATOR = "id:org.wikipedia:id/page_list_item_title";
+    protected static String
+    SEARCH_INIT_ELEMENT,
+    SEARCH_INPUT,
+    SEARCH_CANCEL_BUTTON,
+    SEARCH_RESULT_BY_SUBSTRING_TPL,
+    SEARCH_RESULT_BY_SUBSTRING2_TPL,
+    SEARCH_RESULT_ELEMENT,
+    SEARCH_EMPTY_RESULT_ELEMENT,
+    SEARCH_RESULT_LOCATOR;
 
     public SearchPageObject(AppiumDriver driver) { //берем драйвер из MainPageObject
         super(driver);
