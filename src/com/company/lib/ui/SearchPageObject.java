@@ -2,7 +2,6 @@ package com.company.lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class SearchPageObject extends MainPageObject {
@@ -101,7 +100,7 @@ public class SearchPageObject extends MainPageObject {
                 10
         );
         int amount_of_search_results = assertElementPresent(
-                By.xpath(SEARCH_RESULT_LOCATOR)
+                SEARCH_RESULT_LOCATOR
         );
         Assert.assertTrue(
                 "We have found too few results of searching",

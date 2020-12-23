@@ -140,7 +140,9 @@ public class MainPageObject {
         }
     }
 
-    public int assertElementPresent(By by) {
+    public int assertElementPresent(String locator) {
+
+        By by = this.getLocatorByString(locator);
         List elements = driver.findElements(by);
         return elements.size();
     }

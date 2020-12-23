@@ -24,12 +24,6 @@ public class MyListsPageObject extends MainPageObject {
                 "Cannot open My lists screen",
                 5
         );
-
-        waitForElementAndClick( //Открытие списка статей с сохраненными двумя статьями
-                ARTICLE_LIST_TITLE,
-                "Cannot open articles list titled '" + articles_list_title + "'",
-                5
-        );
     }
 
     public void swipeArticleToDelete(String first_word_for_search_description){
