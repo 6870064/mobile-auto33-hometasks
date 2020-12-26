@@ -1,10 +1,12 @@
 package com.company.tests.Android;
 
 import com.company.lib.CoreTestCase;
-import com.company.lib.ui.SearchPageObject;
 import com.company.lib.ui.ArticlePageObject;
 import com.company.lib.ui.MyListsPageObject;
 import com.company.lib.ui.NavigationUI;
+import com.company.lib.ui.SearchPageObject;
+import com.company.lib.ui.factories.ArticlePageObjectFactory;
+import com.company.lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
 public class HomeTaskTests extends CoreTestCase {
@@ -19,14 +21,14 @@ public class HomeTaskTests extends CoreTestCase {
 
     @Test
     public void testCompareOneArticleTitle(){ //Ex.3
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.typeSkipElement();
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(first_word_for_search);
         SearchPageObject.clickByArticleWithSubstring(first_word_for_search_description);
 
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         String article_title = ArticlePageObject.getArticleTitle();
 
         assertEquals(
@@ -63,14 +65,14 @@ public class HomeTaskTests extends CoreTestCase {
     @Test
     public void testSaveArticlesToMyList(){ //Ex5.Тест: сохранение двух статей
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.typeSkipElement();
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(first_word_for_search);
         SearchPageObject.clickByArticleWithSubstring(first_word_for_search_description);
 
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
         String article_title = ArticlePageObject.getArticleTitle();
         ArticlePageObject.addFirstArticleToMyList(articles_list_title, articles_list_description);
@@ -93,7 +95,7 @@ public class HomeTaskTests extends CoreTestCase {
     @Test
     public void testAssertTitleTest(){  // Ex6: Тест: assert title
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.typeSkipElement();
         SearchPageObject.initSearchInput();
@@ -104,7 +106,7 @@ public class HomeTaskTests extends CoreTestCase {
     @Test
     public void testChangesScreenOrientationFirst(){ // Ex7*: Поворот экрана Тест. Первый тест, который падает после смены ориентации
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.typeSkipElement();
         SearchPageObject.initSearchInput();
@@ -117,7 +119,7 @@ public class HomeTaskTests extends CoreTestCase {
     @Test
     public void testChangesScreenOrientationSecond() { // Ex7*: Поворот экрана Тест. Второй тест, идущий в Portrait orientation вслед за "упавшим" первым
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.typeSkipElement();
         SearchPageObject.initSearchInput();

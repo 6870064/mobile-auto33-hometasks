@@ -1,8 +1,10 @@
 package com.company.tests.Android;
 
 import com.company.lib.CoreTestCase;
-import com.company.lib.ui.SearchPageObject;
 import com.company.lib.ui.ArticlePageObject;
+import com.company.lib.ui.SearchPageObject;
+import com.company.lib.ui.factories.ArticlePageObjectFactory;
+import com.company.lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
 import java.time.Duration;
@@ -19,14 +21,14 @@ public class ChangeAppConditionTests extends CoreTestCase {
 
     @Test
     public void testChangeScreenOrientationOnSearchResults() {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.typeSkipElement();
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(first_word_for_search);
         SearchPageObject.clickByArticleWithSubstring(first_word_for_search_description);
 
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         String title_before_rotation = ArticlePageObject.getArticleTitle();
         this.rotateScreenLandscape();
         String title_after_rotation = ArticlePageObject.getArticleTitle();
@@ -50,7 +52,7 @@ public class ChangeAppConditionTests extends CoreTestCase {
     @Test
     public void testCheckSearchArticleInBackground(){
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.typeSkipElement();
         SearchPageObject.initSearchInput();

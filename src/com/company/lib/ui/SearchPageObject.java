@@ -2,11 +2,11 @@ package com.company.lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
 
 abstract public class SearchPageObject extends MainPageObject {
 
     protected static String
+    SKIP_BUTTON,
     SEARCH_INIT_ELEMENT,
     SEARCH_INPUT,
     SEARCH_CANCEL_BUTTON,
@@ -29,8 +29,10 @@ abstract public class SearchPageObject extends MainPageObject {
     }
 
     public void typeSkipElement() { //кликаем на кнопкку SKIP
-      WebElement element_to_skip = driver.findElementByXPath("//*[contains(@text,'SKIP')]");
-      element_to_skip.click();
+            this.waitForElementAndClick(
+                    SKIP_BUTTON,
+                    "Cannot find and tap [Skip] button",
+                    5);
     }
 
     public void initSearchInput(){ //метод, инициализирующий процесс поиска: тапает по элементу и проверяет, что input действительно есть

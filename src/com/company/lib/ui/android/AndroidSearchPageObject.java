@@ -6,6 +6,7 @@ import io.appium.java_client.AppiumDriver;
 public class AndroidSearchPageObject extends SearchPageObject {
 
     static{
+    SKIP_BUTTON = "xpath://*[contains(@text,'SKIP')]";
     SEARCH_INIT_ELEMENT = "xpath://*[contains(@text,'Search Wikipedia')]";
     SEARCH_CANCEL_BUTTON = "id:org.wikipedia:id/search_close_btn";
     SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING}']";

@@ -1,23 +1,24 @@
 package com.company.lib.ui;
 
+import com.company.lib.Platform;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 
-public class ArticlePageObject extends MainPageObject {
+abstract public class ArticlePageObject extends MainPageObject {
 
-    private static final String
-    FIRST_ARTICLE_TITLE_TEXT = "xpath://*[contains(@text,'Java (programming language)')]",
-    SECOND_ARTICLE_TITLE_TEXT = "xpath://*[contains(@text,'German industrial metal band')]",
-    FOOTER_ELEMENT = "xpath://*[@text = 'View page in browser']",
-    FIRST_ARTICLE_DESCRIPTION = "xpath://*[contains(@text,'Java (programming language)')]",
-    SAVE_BUTTON = "id:org.wikipedia:id/article_menu_bookmark",
-    ADD_TO_LIST_BUTTON = "id:org.wikipedia:id/snackbar_action",
-    GOT_IT_BUTTON = "id:org.wikipedia:id/onboarding_button",
-    FIRST_TEXT_INPUT = "id:org.wikipedia:id/text_input",
-    SECOND_TEXT_INPUT = "id:org.wikipedia:id/secondary_text_input",
-    MY_LIST_OK_BUTTON = "xpath://*[@text='OK']",
-    NAVIGATE_UP_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']",
-    ARTICLE_LIST_TITLE = "xpath://android.widget.TextView[@text='1-st articles list for reading']";
+    protected static String
+    FIRST_ARTICLE_TITLE_TEXT,
+    SECOND_ARTICLE_TITLE_TEXT,
+    FOOTER_ELEMENT,
+    FIRST_ARTICLE_DESCRIPTION,
+    SAVE_BUTTON,
+    ADD_TO_LIST_BUTTON,
+    GOT_IT_BUTTON,
+    FIRST_TEXT_INPUT,
+    SECOND_TEXT_INPUT,
+    MY_LIST_OK_BUTTON,
+    NAVIGATE_UP_BUTTON,
+    ARTICLE_LIST_TITLE;
 
     public ArticlePageObject(AppiumDriver driver) {
     super(driver);
@@ -33,15 +34,27 @@ public class ArticlePageObject extends MainPageObject {
 
     public String getArticleTitle(){ //получение тайтла статьи
         WebElement title_element = waitForTitleElement();
-        return title_element.getAttribute("text");
+        if (Platform.getInstance().isAndroid()) {
+            return title_element.getAttribute("text");
+        } else {
+            return title_element.getAttribute("name");
+        }
     }
 
     public void swipeToFooter(){
-        this.swipeUpToFindElement(
-                FOOTER_ELEMENT,
-                "Cannot find the end of the article",
-                20
-        );
+
+        if (Platform.getInstance().isAndroid()){
+            this.swipeUpToFindElement(
+                    FOOTER_ELEMENT,
+                    "Cannot find the end of the article",
+                    20
+            );
+        } else {
+            this.swipeUpTillElementAppear(FOOTER_ELEMENT,
+            "Cannot find the end of the article",
+            40);
+        }
+
     }
 
 public void addFirstArticleToMyList(String articles_list_title, String articles_list_description){

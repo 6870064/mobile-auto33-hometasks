@@ -3,6 +3,8 @@ package com.company.tests.Android;
 import com.company.lib.CoreTestCase;
 import com.company.lib.ui.SearchPageObject;
 import com.company.lib.ui.ArticlePageObject;
+import com.company.lib.ui.factories.ArticlePageObjectFactory;
+import com.company.lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
 public class ArticleTests extends CoreTestCase {
@@ -17,14 +19,14 @@ public class ArticleTests extends CoreTestCase {
 
     @Test
     public void testCompareArticle(){
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.typeSkipElement();
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(first_word_for_search);
         SearchPageObject.clickByArticleWithSubstring(first_word_for_search_description);
 
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         String article_title = ArticlePageObject.getArticleTitle();
 
         assertEquals(
@@ -37,14 +39,14 @@ public class ArticleTests extends CoreTestCase {
     @Test
     public void testSwipeArticle(){
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.typeSkipElement();
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(first_word_for_search);
         SearchPageObject.clickByArticleWithSubstring(first_word_for_search_description);
 
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
         ArticlePageObject.swipeToFooter();
     }
