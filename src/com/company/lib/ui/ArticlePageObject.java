@@ -18,7 +18,12 @@ abstract public class ArticlePageObject extends MainPageObject {
     SECOND_TEXT_INPUT,
     MY_LIST_OK_BUTTON,
     NAVIGATE_UP_BUTTON,
-    ARTICLE_LIST_TITLE;
+    ARTICLE_LIST_TITLE,
+    LOG_IN_TO_SYNC_BUTTON,
+    CLOSE_LOG_IN_POP_UP_BUTTON,
+    ADD_ARTICLE_TO_THE_LIST,
+    ADD_BUTTON,
+    BACK_BUTTON;
 
     public ArticlePageObject(AppiumDriver driver) {
     super(driver);
@@ -129,6 +134,36 @@ public void addFirstArticleToMyList(String articles_list_title, String articles_
                 "Cannot find option to add article to the reading list",
                 5
         );
-
     }
+
+    public void addArticleToMySaved(){
+
+    this.waitForElementAndClick(
+    ADD_TO_LIST_BUTTON,
+    "Cannot close article, cannot find option to add article to the reading list",
+    12
+        );
+
+        this.waitForElementAndClick(
+                LOG_IN_TO_SYNC_BUTTON,
+                "Cannot tap [log in to sync your saved articles] button",
+                12
+        );
+        this.waitForElementAndClick(
+                CLOSE_LOG_IN_POP_UP_BUTTON,
+                "Cannot tap [x] button to close pop up",
+                12
+        );
+
+        this.waitForElementAndClick(
+                BACK_BUTTON,
+                "Cannot tap [<] Back button to close pop up",
+                12
+        );
+    }
+
+
+
+
+
 }

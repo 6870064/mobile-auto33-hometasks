@@ -1,6 +1,7 @@
 package com.company.tests.Android;
 
 import com.company.lib.CoreTestCase;
+import com.company.lib.Platform;
 import com.company.lib.ui.ArticlePageObject;
 import com.company.lib.ui.MyListsPageObject;
 import com.company.lib.ui.NavigationUI;
@@ -75,7 +76,12 @@ public class HomeTaskTests extends CoreTestCase {
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
         String article_title = ArticlePageObject.getArticleTitle();
-        ArticlePageObject.addFirstArticleToMyList(articles_list_title, articles_list_description);
+
+        if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.addFirstArticleToMyList(articles_list_title, articles_list_description);
+        } else {
+            ArticlePageObject.addArticleToMySaved();
+        }
 
         NavigationUI NavigationUI = new NavigationUI(driver);
         NavigationUI.backNavigation();
