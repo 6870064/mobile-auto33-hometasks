@@ -96,7 +96,7 @@ abstract public class SearchPageObject extends MainPageObject {
         this.assertElementNotPresent(SEARCH_RESULT_ELEMENT, "We supposed not to find any results");
     }
 
-    public void assertSearchResult(String first_word_for_search){
+    public void assertSearchResult(String first_word_for_search) {
         waitForElementPresent(
                 SEARCH_RESULT_LOCATOR,
                 "Cannot find anything by the request " + first_word_for_search,
@@ -109,5 +109,9 @@ abstract public class SearchPageObject extends MainPageObject {
                 "We have found too few results of searching",
                 amount_of_search_results > 0
         );
+
+    }
+    public void SearchFieldClear(){ //Метод клика по кнопке [X] Cancel Search
+        this.waitForElementAndClick(SEARCH_CANCEL_BUTTON,"Search cancel button is still presented", 5);
     }
 }

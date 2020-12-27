@@ -1,22 +1,21 @@
 package com.company.lib.ui;
 
+import com.company.lib.Platform;
 import io.appium.java_client.AppiumDriver;
 
-public class MyListsPageObject extends MainPageObject {
+abstract public class MyListsPageObject extends MainPageObject {
 
-
-    public MyListsPageObject(AppiumDriver driver){
+     public MyListsPageObject(AppiumDriver driver){
         super(driver);
     }
 
-    public static String
-    ADD_TO_LIST_BUTTON = "id:org.wikipedia:id/snackbar_action",
-   ARTICLE_LIST_TITLE = "xpath://android.widget.TextView[@text='1-st articles list for reading']",
-   DELETE_FIRST_ARTICLE_TITLE = "xpath://*[@text='Object-oriented programming language']",
-    SECOND_ARTICLE_TITLE =  "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='Rammstein']"
-
-
-    ;
+    protected static String
+    ADD_TO_LIST_BUTTON,
+    ARTICLE_LIST_TITLE,
+    DELETE_FIRST_ARTICLE_TITLE,
+    SECOND_ARTICLE_TITLE,
+    ARTICLE_BY_TITLE_TPL,
+    SAVED_BUTTON;
 
     public void myListOpening(String articles_list_title){
         waitForElementAndClick( // Нажатие на [VIEW LIST] и открытие переченя списков статей
@@ -26,11 +25,15 @@ public class MyListsPageObject extends MainPageObject {
         );
     }
 
-    public void swipeArticleToDelete(String first_word_for_search_description){
+    public void swipeArticleToDelete(String article_title){
         swipeElementToTheLeft( // Удаление первой статьи
                 DELETE_FIRST_ARTICLE_TITLE,
                 "Cannot find saved article"
         );
+
+        if (Platform.getInstance().isIOS()){
+            this.clickElementToTheRightUpperCorner(DELETE_FIRST_ARTICLE_TITLE,"Cannot find saved article for swipe");
+        }
 
         waitForElementNotPresent(
                 DELETE_FIRST_ARTICLE_TITLE,
@@ -51,5 +54,13 @@ public class MyListsPageObject extends MainPageObject {
                 "Cannot open the article titled " + second_word_for_search + "",
                 10
         );
+    }
+    public void mySavedArticlesFolderOpening(){
+        waitForElementAndClick(
+              SAVED_BUTTON,
+                "Cannot find saved articles list",
+              5);
+
+
     }
 }
