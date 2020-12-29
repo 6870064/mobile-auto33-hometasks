@@ -1,7 +1,7 @@
 package com.company.lib.ui.android;
 
 import com.company.lib.ui.ArticlePageObject;
-import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AndroidArticlePageObject extends ArticlePageObject {
 
@@ -20,7 +20,7 @@ public class AndroidArticlePageObject extends ArticlePageObject {
     ARTICLE_LIST_TITLE = "xpath://android.widget.TextView[@text='1-st articles list for reading']";
     }
 
-    public AndroidArticlePageObject(AppiumDriver driver){
+    public AndroidArticlePageObject(RemoteWebDriver driver){
         super(driver);
     }
 }

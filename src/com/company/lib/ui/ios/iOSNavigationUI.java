@@ -1,7 +1,7 @@
 package com.company.lib.ui.ios;
 
 import com.company.lib.ui.NavigationUI;
-import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class iOSNavigationUI extends NavigationUI {
 
@@ -10,7 +10,7 @@ public class iOSNavigationUI extends NavigationUI {
         EXPLORE_BUTTON = "id:Explore";
     }
 
-   public iOSNavigationUI(AppiumDriver driver){
+   public iOSNavigationUI(RemoteWebDriver driver){
        super(driver);
    }
 }

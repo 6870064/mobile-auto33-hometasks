@@ -1,7 +1,7 @@
 package com.company.lib.ui.android;
 
 import com.company.lib.ui.SearchPageObject;
-import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AndroidSearchPageObject extends SearchPageObject {
 
@@ -16,7 +16,7 @@ public class AndroidSearchPageObject extends SearchPageObject {
     SEARCH_RESULT_LOCATOR = "id:org.wikipedia:id/page_list_item_title";
     }
 
-    public AndroidSearchPageObject(AppiumDriver driver){
+    public AndroidSearchPageObject(RemoteWebDriver driver){
         super(driver);
     }
 }

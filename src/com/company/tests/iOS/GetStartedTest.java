@@ -3,6 +3,7 @@ package com.company.tests.iOS;
 import com.company.lib.CoreTestCase;
 import com.company.lib.Platform;
 import com.company.lib.ui.WelcomePageObject;
+import io.appium.java_client.AppiumDriver;
 import org.junit.Test;
 
 public class GetStartedTest extends CoreTestCase {
@@ -14,7 +15,7 @@ public class GetStartedTest extends CoreTestCase {
             return;
         }
 
-    WelcomePageObject WelcomePage = new WelcomePageObject(driver);
+    WelcomePageObject WelcomePage = new WelcomePageObject((AppiumDriver) driver);
     WelcomePage.waitForLearnMoreLink();
     WelcomePage.clickNextButton();
     WelcomePage.waitForNewWayToExploreText();

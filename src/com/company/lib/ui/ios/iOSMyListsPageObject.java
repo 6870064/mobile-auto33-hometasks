@@ -1,7 +1,7 @@
 package com.company.lib.ui.ios;
 
 import com.company.lib.ui.MyListsPageObject;
-import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class iOSMyListsPageObject extends MyListsPageObject {
 
@@ -12,7 +12,7 @@ public class iOSMyListsPageObject extends MyListsPageObject {
         SAVED_BUTTON = "id:Saved";
     }
 
-    public iOSMyListsPageObject(AppiumDriver driver){
+    public iOSMyListsPageObject(RemoteWebDriver driver){
         super(driver);
     }
 

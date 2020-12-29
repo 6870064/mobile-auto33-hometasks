@@ -1,6 +1,7 @@
 package com.company.lib.ui.factories;
+
 import com.company.lib.ui.MyListsPageObject;
-import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AndroidMyListsPageObject extends MyListsPageObject {
 
@@ -11,7 +12,7 @@ public class AndroidMyListsPageObject extends MyListsPageObject {
     SECOND_ARTICLE_TITLE =  "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='Rammstein']";
     }
 
-    public AndroidMyListsPageObject(AppiumDriver driver){
+    public AndroidMyListsPageObject(RemoteWebDriver driver){
         super(driver);
     }
 }

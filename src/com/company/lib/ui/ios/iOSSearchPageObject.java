@@ -1,7 +1,7 @@
 package com.company.lib.ui.ios;
 
 import com.company.lib.ui.SearchPageObject;
-import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class iOSSearchPageObject extends SearchPageObject {
 
@@ -18,7 +18,7 @@ public class iOSSearchPageObject extends SearchPageObject {
         SEARCH_RESULT_LOCATOR = "xpath://XCUIElementTypeLink[@name='Java (programming language) Object-oriented programming language']";
     }
 
-    public iOSSearchPageObject(AppiumDriver driver){
+    public iOSSearchPageObject(RemoteWebDriver driver){
         super(driver);
     }
 }

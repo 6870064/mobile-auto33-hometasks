@@ -1,7 +1,7 @@
 package com.company.lib.ui.ios;
 
 import com.company.lib.ui.ArticlePageObject;
-import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class iOSArticlePageObject extends ArticlePageObject {
 
@@ -20,7 +20,7 @@ public class iOSArticlePageObject extends ArticlePageObject {
         CLOSE_SYNC_POP_UP_BUTTON = "id:places auth close";
     }
 
-    public iOSArticlePageObject(AppiumDriver driver){
+    public iOSArticlePageObject(RemoteWebDriver driver){
         super(driver);
     }
 }
