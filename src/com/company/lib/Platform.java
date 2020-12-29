@@ -1,10 +1,15 @@
 package com.company.lib;
+
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Platform {
 
@@ -32,6 +37,8 @@ public class Platform {
             return new AndroidDriver(URL, this.getAndroidDesiredCapabilities());
         } else if (this.isIOS()) {
             return new IOSDriver(URL, this.getiOSDesiredCapabilities());
+        } else if (this.isMobileWeb()) {
+            return new ChromeDriver(this.getMobileWebChromeOptions());
         } else {
             throw new Exception("Cannot detect type of the driver. Platform value: " +this.getPlatformVar());
         }
@@ -71,6 +78,24 @@ public class Platform {
         capabilities.setCapability("app", "/Users/dzmitryviachaslavau/Documents/MobileAutomationCourse/HomeTasks/mobile-auto33-hometasks/apks/Wikipedia.app");
         return capabilities;
     }
+
+    private ChromeOptions getMobileWebChromeOptions(){
+        Map<String, Object> deviceMetrics = new HashMap<String, Object>();
+        deviceMetrics.put("width", 360);
+        deviceMetrics.put("height", 360);
+        deviceMetrics.put("pixelRatio", 3.0);
+
+        Map<String, Object> mobileEmulation = new HashMap<String, Object>();
+        mobileEmulation.put("deviceMetrics", deviceMetrics);
+        mobileEmulation.put("userAgent","Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19");
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("window-size=340,640");
+
+        return chromeOptions;
+    }
+
+
 
     private boolean isPlatform(String my_platform){ //Метод, сравнивающий нашу платформу с той переменной, которая приходит ему на вход
         String platform = this.getPlatformVar();

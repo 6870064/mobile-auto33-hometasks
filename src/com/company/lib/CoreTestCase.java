@@ -14,6 +14,7 @@ public class CoreTestCase extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         driver = Platform.getInstance().getDriver();
+        this.openWikiWebPageForMobileWeb();
     }
 
     @Override
@@ -38,6 +39,14 @@ public class CoreTestCase extends TestCase {
             driver.rotate(ScreenOrientation.LANDSCAPE);
         } else {
             System.out.println("Method rotateScreenLandscape() does nothing for platform " + Platform.getInstance().getPlatformVar());
+        }
+    }
+
+    protected void openWikiWebPageForMobileWeb(){
+        if (Platform.getInstance().isMobileWeb()){
+            driver.get("https://en.m.wikipedia.org");
+        } else {
+            System.out.println("Method openWikiWebPageForMobileWeb() does nothing for platform " + Platform.getInstance().getPlatformVar());
         }
     }
 

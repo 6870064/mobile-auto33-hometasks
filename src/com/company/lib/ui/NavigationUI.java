@@ -18,7 +18,7 @@ abstract public class NavigationUI extends MainPageObject{
     public void backNavigation(){
         if (driver instanceof AppiumDriver) {
             AppiumDriver driver = (AppiumDriver) this.driver;
-            
+
             if (Platform.getInstance().isAndroid()) {
                 driver.hideKeyboard();
                 this.waitForElementAndClick(SEARCH_CANCEL_BUTTON, "Cannot find and click '[x] button'", 5);
